@@ -14,14 +14,14 @@ on:
     branches:
       - main
     paths:
-      # - 'apis/user-java/**'
-      - ${{ env.MAVEN_HOME }}/**
+      - 'apis/user-java/**'
+      # - ${{ env.MAVEN_HOME }}/**
 
 
 jobs:
   build:
-    env:
-      MAVEN_HOME: apis/user-java
+    # env:
+    #   MAVEN_HOME: apis/user-java
 
     runs-on: ubuntu-latest
     permissions:
