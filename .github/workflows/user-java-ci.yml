@@ -33,8 +33,11 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
-#       run: mvn -B package --file apis/user-java/pom.xml
       run: cd apis/user-java && mvn clean install
+
+    - name: Test Maven
+      run: mvn test
+
 
 #     - name: Publish to GitHub Packages Apache Maven
 #       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
