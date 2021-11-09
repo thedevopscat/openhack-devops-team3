@@ -4,6 +4,9 @@
 name: user-java Maven Package
 
 on:
+
+  workflow_dispatch:
+
   pull_request:
     branches:
       - main
