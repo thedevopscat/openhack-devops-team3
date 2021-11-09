@@ -22,6 +22,7 @@ Change default port value in `src/main/resources/application.properties`
 
 ## Run only the tests
 
+
 `mvn test`
 
 ## Run the application
