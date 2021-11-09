@@ -3,6 +3,9 @@
 
 name: user-java Maven Package
 
+env:
+  MAVEN_HOME: apis/user-java
+
 on:
 
   workflow_dispatch:
@@ -12,10 +15,8 @@ on:
       - main
     paths:
       # - 'apis/user-java/**'
-      - '${{ env.MAVEN_HOME }}/**'
+      - ${{ env.MAVEN_HOME }}/**
 
-env:
-  MAVEN_HOME: apis/user-java
 
 jobs:
   build:
