@@ -62,7 +62,8 @@ while [[ true ]]; do
      echo "$timestamp | $status | $endpoint " 
    fi 
 
-   if [ $result == "0" ]; then
+   echo $result
+   if [ $result == "HTTP/2 200" ]; then
      exit 0
    fi
    sleep $duration
