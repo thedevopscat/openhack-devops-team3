@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - apis/poi/**
+      - apis/poi/web/**
   workflow_dispatch:
 name: poi-cd
 env:
@@ -10,7 +10,7 @@ env:
 defaults:
   run:
     shell: bash
-    working-directory: apis/poi
+    working-directory: apis/poi/web
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
