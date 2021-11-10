@@ -5,6 +5,14 @@ on:
 
 name: Linux_Container_Workflow
 
+env:
+  REPO_NAME: devopsoh/api-user-java    # per api
+
+defaults:
+  run:
+    shell: bash
+    working-directory: apis/user-java    # per api
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -17,16 +25,16 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-#      - name: 'Build and push image'
-#        uses: azure/docker-login@v1
-#        with:
-#          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-#          username: ${{ secrets.REGISTRY_USERNAME }}
-#          password: ${{ secrets.REGISTRY_PASSWORD }}
-#      - run: |
-#          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
-#          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/sampleapp:${{ github.sha }}
-#
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - run: |
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+
 #      - name: 'Deploy to Azure Container Instances'
 #        uses: 'azure/aci-deploy@v1'
 #        with:
