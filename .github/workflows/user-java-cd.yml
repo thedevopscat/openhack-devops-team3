@@ -41,4 +41,5 @@ jobs:
         with:
           #app-name: $APP_NAME
           app-name: openhack8ep4f6r5userjava
-          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+          #images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/devopsoh/api-user-java:${{ github.sha }}
