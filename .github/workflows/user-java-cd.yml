@@ -1,9 +1,11 @@
-# on:
-#   push:
-#     paths:
-#       - 'apis/user-java/**'
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'apis/user-java/**'
 
-#   workflow_dispatch:
+   workflow_dispatch:
 
 name: user-java-cd
 
