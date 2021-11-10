@@ -2,7 +2,7 @@ name: poi-ci
 defaults:
   run:
     shell: bash
-    working-directory: apis/poi
+    working-directory: apis/poi/
 on:
   workflow_dispatch:
   pull_request:
