@@ -34,6 +34,10 @@ jobs:
         go-version: '^1.13.1' # The Go version to download (if necessary) and use.
     - run: go version
 
+    - name: Build
+      working-directory: ${{ env.HOME }}
+      run: go build -v
+
     - name: Build and Test Go
       working-directory: ${{ env.HOME }}
       run: go test ./tripgo -run Unit
