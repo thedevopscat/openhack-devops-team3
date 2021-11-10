@@ -48,4 +48,11 @@ jobs:
 
     - name: Test Maven
       working-directory: ${{ env.MAVEN_HOME }}
-      run: mvn test
+      run: |
+        mvn test
+        exit 1
+
+    - name: Step To run on failure
+      if: ${{ failure() }}
+      run:  echo FAILURE
+
