@@ -34,23 +34,31 @@ jobs:
     - name: Print the input name to STDOUT
       run: echo First Test
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
-        settings-path: ${{ github.workspace }} # location for the settings.xml file
+    # - name: Set up JDK 11
+    #   uses: actions/setup-java@v2
+    #   with:
+    #     java-version: '11'
+    #     distribution: 'adopt'
+    #     server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
+    #     settings-path: ${{ github.workspace }} # location for the settings.xml file
 
-    - name: Build with Maven
-      working-directory: ${{ env.MAVEN_HOME }}
-      run: mvn clean install
+    # - name: Build with Maven
+    #   working-directory: ${{ env.MAVEN_HOME }}
+    #   run: mvn clean install
 
-    - name: Test Maven
-      working-directory: ${{ env.MAVEN_HOME }}
-      run: mvn test
+    # - name: Test Maven
+    #   working-directory: ${{ env.MAVEN_HOME }}
+    #   run: mvn test
       
-    - name: Step To run on failure
-      if: ${{ failure() }}
-      run:  echo FAILURE
+    - name: Step To cause error
+      run:  exit 1
 
+    - uses: nashmaniac/create-issue-action@v1.1
+      name: Create Issue Action
+      if: ${{ failure() }}
+      with:
+        title: Build Failed
+        token: ${{secrets.GITHUB_TOKEN}}
+        assignees: ${{github.actor}}
+        labels: worflow-failed
+        body: Workflow failed for commit ${{github.sha}}
