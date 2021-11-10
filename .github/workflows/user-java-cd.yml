@@ -5,7 +5,7 @@ on:
     paths:
       - 'apis/user-java/**'
 
-   workflow_dispatch:
+  workflow_dispatch:
 
 name: user-java-cd
 
