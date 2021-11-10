@@ -61,5 +61,9 @@ while [[ true ]]; do
    else
      echo "$timestamp | $status | $endpoint " 
    fi 
+
+   if [ $result == "0" ]; then
+     exit 0
+   fi
    sleep $duration
 done
