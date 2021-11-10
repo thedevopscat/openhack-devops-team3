@@ -24,7 +24,7 @@ jobs:
       packages: write
       issues: write
     env:
-      GOPATH: ${{ github.workspace }}/$HOME
+      GOPATH: ${{ github.workspace }}/${{ env.HOME }}
 
     steps:
     - uses: actions/checkout@v2
