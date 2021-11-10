@@ -2,14 +2,14 @@ name: poi-ci
 defaults:
   run:
     shell: bash
-    working-directory: apis/poi/web/
+    working-directory: apis/poi/
 on:
   workflow_dispatch:
   pull_request:
     branches:
       - main
     paths:
-      - apis/poi/web/**
+      - apis/poi/**
 jobs:
   build:
     runs-on: ubuntu-latest
