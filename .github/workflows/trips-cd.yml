@@ -3,7 +3,7 @@ on:
 
   workflow_dispatch:
 
-name: Linux_Container_Workflow
+name: Trips_Deployment_Workflow
 
 env:
   REPO_NAME: devopsoh/api-trips    # per api
