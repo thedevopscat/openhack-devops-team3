@@ -62,8 +62,8 @@ while [[ true ]]; do
      echo "$timestamp | $status | $endpoint " 
    fi 
 
-   echo "X${result}X"
-   if [ "$result" = "HTTP/2 200" ]; then
+   echo "X${status}X"
+   if [ "$status" = "0" ]; then
      exit 0
    fi
    sleep $duration
