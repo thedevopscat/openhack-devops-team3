@@ -1,0 +1,37 @@
+on:
+  push:
+    paths:
+      - apis/poi/**
+  workflow_dispatch:
+name: poi-cd
+env:
+  REPO_NAME: devopsoh/api-poi
+  APP_NAME: openhack8ep4f6r5userjava
+defaults:
+  run:
+    shell: bash
+    working-directory: apis/poi
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - run: |
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+      - name: 'Deploy to Azure Container Instances'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.APP_NAME }}
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.REPO_NAME }}:${{ github.sha }}
