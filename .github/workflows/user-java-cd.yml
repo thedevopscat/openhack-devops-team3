@@ -28,7 +28,7 @@ jobs:
 
       - name: 'Deployment Validation'
         working-directory: resources
-        run: ./polling.sh https://${{ env.APP_NAME }}-staging.azurewebsites.net/api/healthcheck/user-java
+        run: ./polling.ps1 https://${{ env.APP_NAME }}-staging.azurewebsites.net/api/healthcheck/user-java
       
       #- name: 'Swap Azure Containers'
       #  run: az webapp deployment slot swap -g ${{ env.RESOURCE_GROUP }} -n ${{ env.APP_NAME }} --slot staging --target-slot production
