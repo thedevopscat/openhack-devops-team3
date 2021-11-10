@@ -17,6 +17,8 @@ on:
       - 'apis/user-java/**'
       # - ${{ env.MAVEN_HOME }}/**
 
+permissions:
+  issues: write
 
 jobs:
   build:
