@@ -1,5 +1,7 @@
 on:
   push:
+    paths:
+      - 'apis/user-java/**'
 
   workflow_dispatch:
 
