@@ -51,6 +51,7 @@ jobs:
           slot-name: 'staging'
 
       - name: 'Deployment Validation'
+        timeout-minutes: 1
         working-directory: resources
         shell: pwsh
         run: ./polling.ps1 https://${{ env.APP_NAME }}-staging.azurewebsites.net/api/healthcheck/user-java
