@@ -8,14 +8,11 @@ on:
 
   workflow_dispatch:
 
-  push:
-
   pull_request:
     branches:
       - main
     paths:
-      # - 'apis/userprofile/**'
-      - ${{ env.WORKINGDIR_HOME }}
+      - 'apis/userprofile/**'
   
 jobs:
   build:
