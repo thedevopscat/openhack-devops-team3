@@ -57,7 +57,7 @@ jobs:
         --data '{
           "title": "Automated issue for commit: ${{ github.sha }} on workflow ${{ github.workflow }}",
           "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
-          "assignees": "${{ github.actor }}"
+          "assignees": ["${{ github.actor }}"]
           }' \
         --fail
 
