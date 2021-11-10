@@ -15,24 +15,17 @@ on:
       - main
     paths:
       - 'apis/user-java/**'
-      # - ${{ env.MAVEN_HOME }}/**
-
 
 jobs:
   build:
-    # env:
-    #   MAVEN_HOME: apis/user-java
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
+      issues: write
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Print the input name to STDOUT
-      run: echo First Test
 
     - name: Set up JDK 11
       uses: actions/setup-java@v2
@@ -48,4 +41,21 @@ jobs:
 
     - name: Test Maven
       working-directory: ${{ env.MAVEN_HOME }}
-      run: mvn test
+      run: |
+        mvn test
+        echo Breaing the test
+        exit 1
+      
+    - name: Create issue using REST API
+      if: ${{ failure() }}
+      run: |
+        curl --request POST \
+        --url https://api.github.com/repos/${{ github.repository }}/issues \
+        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+        --data '{
+          "title": "Automated issue for commit: ${{ github.sha }}",
+          "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+          }' \
+        --fail
+
