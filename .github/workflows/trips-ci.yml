@@ -24,7 +24,7 @@ jobs:
       packages: write
       issues: write
     env:
-      GOPATH: ${{ github.workspace }}/apis/trips
+      GOPATH: ${{ github.workspace }}
 
     steps:
     - uses: actions/checkout@v2
