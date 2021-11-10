@@ -1,0 +1,63 @@
+name: userprofile CI
+
+env:
+  WORKINGDIR_HOME: apis/userprofile
+  NODE_VERSION: 12.22.7
+
+on:
+  workflow_dispatch:
+
+  push:
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'apis/userprofile/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      issues: write
+
+    defaults:
+      run:
+        working-directory: ${{ env.WORKINGDIR_HOME }}    
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ env.NODE_VERSION }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: npm install
+      run: |
+        npm install
+        
+    - name: npm test
+      run: |
+        npm run test --if-present
+        echo Simulate failure...
+        exit 1
+      
+    - name: Create issue using REST API
+      if: ${{ failure() }}
+      run: |
+        echo ${{ github.actor }}
+        curl --request POST \
+        --url https://api.github.com/repos/${{ github.repository }}/issues \
+        --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+        --header 'content-type: application/json' \
+        --data '{
+          "title": "Automated issue for commit: ${{ github.sha }} on workflow ${{ github.workflow }}",
+          "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
+          "assignees": ["${{ github.actor }}"]
+          }' \
+        --fail
+

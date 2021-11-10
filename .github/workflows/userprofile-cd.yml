@@ -1,23 +1,24 @@
+name: userprofile CD
+
 on:
   push:
     paths:
-      - 'apis/user-java/**'
+      - 'apis/userprofile/**'
 
   workflow_dispatch:
 
-name: Linux_Container_Workflow
 
 env:
-  REPO_NAME: devopsoh/api-user-java    # per api
-  APP_NAME: openhack8ep4f6r5userjava
+  REPO_NAME: devopsoh/api-userprofile
+  APP_NAME: openhack8ep4f6r5userprofile
 
 defaults:
   run:
     shell: bash
-    working-directory: apis/user-java    # per api
+    working-directory: apis/userprofile
 
 jobs:
-  build-and-deploy:
+  build-push-publish_to_AppService:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout GitHub Action'
