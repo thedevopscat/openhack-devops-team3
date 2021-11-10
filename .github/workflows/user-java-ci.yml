@@ -43,7 +43,10 @@ jobs:
 
     - name: Test Maven
       working-directory: ${{ env.MAVEN_HOME }}
-      run: mvn test
+      run: |
+        mvn test
+        echo Breaing the test
+        exit 1
       
     - name: Create issue using REST API
       if: ${{ failure() }}
@@ -54,6 +57,8 @@ jobs:
         --header 'content-type: application/json' \
         --data '{
           "title": "Automated issue for commit: ${{ github.sha }}",
-          "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_."
+          "body": "This issue was automatically created by the GitHub Action workflow **${{ github.workflow }}**. \n\n The commit hash was: _${{ github.sha }}_.",
+          "assignees": "${{ github.actor }}"
           }' \
         --fail
+
