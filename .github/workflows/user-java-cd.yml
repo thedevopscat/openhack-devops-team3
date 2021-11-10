@@ -26,10 +26,34 @@ jobs:
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
 
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+      - run: |
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
+
+      - name: 'Deploy to Azure Container Instances'
+        uses: azure/webapps-deploy@v2
+        with:
+          #app-name: openhack8ep4f6r5userjava
+          app-name: ${{ env.APP_NAME }}
+          #images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/devopsoh/api-user-java:${{ github.sha }}
+          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.REPO_NAME }}:${{ github.sha }}
+          slot-name: 'staging'
+
       - name: 'Deployment Validation'
         working-directory: resources
         shell: pwsh
         run: ./polling.ps1 https://${{ env.APP_NAME }}-staging.azurewebsites.net/api/healthcheck/user-java
-      
-      #- name: 'Swap Azure Containers'
-      #  run: az webapp deployment slot swap -g ${{ env.RESOURCE_GROUP }} -n ${{ env.APP_NAME }} --slot staging --target-slot production
+
+      - name: 'Swap Azure Containers'
+        run: az webapp deployment slot swap -g ${{ env.RESOURCE_GROUP }} -n ${{ env.APP_NAME }} --slot staging --target-slot production
