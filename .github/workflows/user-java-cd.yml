@@ -39,5 +39,6 @@ jobs:
       - name: 'Deploy to Azure Container Instances'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: $APP_NAME
+          #app-name: $APP_NAME
+          app-name: openhack8ep4f6r5userjava
           images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/$REPO_NAME:${{ github.sha }}
