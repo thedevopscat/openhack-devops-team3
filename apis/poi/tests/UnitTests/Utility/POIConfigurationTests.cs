@@ -48,7 +48,7 @@ namespace UnitTests.Utility
             var connectionString = POIConfiguration.GetConnectionString(configuration);
 
             //assert
-            var expectedConnectionString = "Server=tcp:sqlserver3,1433;Initial Catalog=db4;Persist Security Info=False;User ID=user1;Password=password2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var expectedConnectionString = "Server=tcp:openhack8ep4f6r5sql.database.windows.net,1433;Initial Catalog=db4;Persist Security Info=False;User ID=user1;Password=password2;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             Assert.Equal(expectedConnectionString, connectionString);
         }
 
