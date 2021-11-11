@@ -62,8 +62,6 @@ jobs:
       working-directory: ${{ env.MAVEN_HOME }}
       run: |
         mvn test
-        echo Breaing the test
-        exit 1
       
     - name: Create issue using REST API
       if: ${{ failure() }}
