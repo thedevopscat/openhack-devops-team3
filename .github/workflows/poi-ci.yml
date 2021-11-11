@@ -10,6 +10,13 @@ on:
       - main
     paths:
       - apis/poi/**
+      
+env:
+  SQL_SERVER: ${{ secrets.SQL_SERVER }}
+  SQL_USER: ${{ secrets.SQL_USER }}
+  SQL_DBNAME: ${{ secrets.SQL_DBNAME }}
+  SQL_PASSWORD: ${{ secrets.SQL_PASSWORD }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
