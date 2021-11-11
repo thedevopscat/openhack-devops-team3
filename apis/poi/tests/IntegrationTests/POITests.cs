@@ -23,7 +23,7 @@ namespace IntegrationTests
         }
 
         [Theory]
-        [InlineData("/api/poi/")]
+        [InlineData("/api/poi/numpty")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange
