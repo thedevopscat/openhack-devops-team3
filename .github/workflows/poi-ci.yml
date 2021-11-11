@@ -19,14 +19,14 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.202
-#     - name: Restore dependencies
-#       run: dotnet restore
+    - name: Restore dependencies
+      run: dotnet restore
 #     - name: Build
 #       run: dotnet build --no-restore
 #     - name: Test
 #       run: dotnet test --no-build --verbosity normal
-    - name: Install dependencies
-      run: dotnet restore apis/poi/web/*.csproj
+#     - name: Install dependencies
+#       run: dotnet restore apis/poi/web/*.csproj
     - name: .NET Build Web
       run: dotnet build --configuration Release --no-restore apis/poi/web/*.csproj
     - name: .NET Build Unit Tests
