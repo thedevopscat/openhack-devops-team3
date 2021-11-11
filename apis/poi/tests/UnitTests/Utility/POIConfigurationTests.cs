@@ -23,7 +23,7 @@ namespace UnitTests.Utility
                 {"SQL_PASSWORD", "password2"},
                 {"SQL_SERVER", "sqlserver3"},
                 {"SQL_DBNAME", "db4"},
-                {"WEB_PORT", "8080"},
+                {"WEB_PORT", "9090"},
                 {"WEB_SERVER_BASE_URI", "https://github.com"},
                 {"ConnectionStrings:myDrivingDB",connectionStringTemplate}
             };
