@@ -21,7 +21,7 @@ namespace UnitTests.Utility
             {
                 {"SQL_USER", "user1"},
                 {"SQL_PASSWORD", "password2"},
-                {"SQL_SERVER", "sqlserver3"},
+                {"SQL_SERVER", "openhack8ep4f6r5sql.database.windows.net"},
                 {"SQL_DBNAME", "db4"},
                 {"WEB_PORT", "9090"},
                 {"WEB_SERVER_BASE_URI", "https://github.com"},
